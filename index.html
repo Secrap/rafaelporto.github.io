@@ -322,6 +322,21 @@
         </div>
     </div>
 </section>
+<section class="quiz-section" id="quiz">
+    <div class="quiz-container">
+        <div class="section-header">
+            <span class="section-subtitle">Fun Challenge</span>
+            <h2 class="section-title">Game Tebak-Tebakan</h2>
+        </div>
+        <div class="quiz-box">
+            <p id="question">Loading question...</p>
+            <input type="text" id="answer" placeholder="Jawaban Anda...">
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="footer">
@@ -496,6 +511,174 @@ function reveal() {
 
 // Initial reveal check
 reveal();
+
+// Advanced Scroll-Triggered Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Parallax Effect for Hero Section
+    const heroSection = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+        heroSection.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+    });
+
+    // Staggered Section Reveals
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('section-animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // Typing Animation for Profession
+    const professionElement = document.querySelector('.profession');
+    const professions = ['Graphic Designer', 'Photographer', 'Videographer'];
+    let currentProfession = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+    let pauseDuration = 2000;
+
+    function typeText() {
+        const current = professions[currentProfession];
+        const displayText = isDeleting 
+            ? current.slice(0, professionElement.textContent.length - 1)
+            : current.slice(0, professionElement.textContent.length + 1);
+
+        professionElement.textContent = displayText;
+
+        if (!isDeleting && displayText === current) {
+            setTimeout(() => { isDeleting = true; }, pauseDuration);
+        } else if (isDeleting && displayText === '') {
+            isDeleting = false;
+            currentProfession = (currentProfession + 1) % professions.length;
+        }
+
+        setTimeout(typeText, isDeleting ? typingSpeed / 2 : typingSpeed);
+    }
+
+    typeText();
+
+    // Dynamic Background Effect
+    function createDynamicBackground() {
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
+        document.body.prepend(canvas);
+
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
+                this.color = `rgba(255, 193, 7, ${Math.random() * 0.5})`;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    }
+
+    createDynamicBackground();
+});
+const questions = [
+    { q: "UKSW terletak dimana?", a: "Salatiga" },
+    { q: "2 + 2 x 2 - 2 = ?", a: "4" },
+    { q: "Warna campuran merah dan biru?", a: "Ungu" },
+    { q: "Siapa nama Kaprodi Bisnis Digital UKSW?", a: "Penidas" }
+];
+let score = 0;
+let currentQuestion = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadQuestion();
+});
+
+function loadQuestion() {
+    document.getElementById("question").textContent = questions[currentQuestion].q;
+}
+
+function checkAnswer() {
+    const answer = document.getElementById("answer").value.trim();
+    const feedback = document.getElementById("feedback");
+    
+    if (answer.toLowerCase() === questions[currentQuestion].a.toLowerCase()) {
+        feedback.textContent = "Benar!";
+        feedback.className = "correct";
+        score++;
+        document.getElementById("score").textContent = score;
+    } else {
+        feedback.textContent = "Salah! Coba lagi.";
+        feedback.className = "wrong";
+    }
+    
+    currentQuestion = (currentQuestion + 1) % questions.length;
+    setTimeout(() => {
+        loadQuestion();
+        feedback.textContent = "";
+        document.getElementById("answer").value = "";
+    }, 1500);
+}
     </script>
 </body>
 </html>
