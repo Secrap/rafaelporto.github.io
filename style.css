@@ -1098,3 +1098,156 @@ textarea.form-control {
         min-height: 120px;
     }
 }
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .project-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .project-image img {
+        height: 300px;
+    }
+
+    .project-info {
+        padding: 25px;
+    }
+
+    .project-info h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-section {
+        padding: 80px 4%;
+    }
+
+    .project-image img {
+        height: 250px;
+    }
+
+    .project-info {
+        padding: 20px;
+    }
+
+    .project-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-overlay .project-category {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .project-link {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Blog Section Responsive Styles */
+@media (max-width: 1200px) {
+    .blog-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .blog-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .blog-content {
+        padding: 25px;
+    }
+
+    .blog-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-section {
+        padding: 80px 4%;
+    }
+
+    .blog-image img {
+        height: 200px;
+    }
+
+    .blog-content {
+        padding: 20px;
+    }
+
+    .blog-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .blog-date {
+        padding: 8px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .blog-date .day {
+        font-size: 1.2rem;
+    }
+
+    .blog-date .month {
+        font-size: 0.7rem;
+    }
+
+    .blog-category {
+        font-size: 0.8rem;
+    }
+
+    .blog-excerpt {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+
+    .read-more {
+        font-size: 0.9rem;
+    }
+}
+
+/* Shared Section Header Responsive Styles */
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
