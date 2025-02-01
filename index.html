@@ -44,7 +44,7 @@
                 <h1 class="title">Hi, I'm <span class="highlight">Rafael</span></h1>
                 <h2 class="profession">
                     <span class="txt-rotate" data-period="2000" 
-                          data-rotate='[ "Graphic Designer", "Photographer", "Videographer" ]'></span>
+                          data-rotate='[ "Websites Designer", "Photographer", "Videographer" ]'></span>
                 </h2>
                 <p class="description">Turning ideas into visual stories and creating lasting impressions through design.</p>
                 <div class="cta-buttons">
@@ -542,33 +542,75 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionObserver.observe(section);
     });
 
-    // Typing Animation for Profession
     const professionElement = document.querySelector('.profession');
-    const professions = ['Graphic Designer', 'Photographer', 'Videographer'];
-    let currentProfession = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    let pauseDuration = 2000;
+const professions = ['Website Designer', 'Photographer', 'Videographer'];
+let currentProfession = 0;
+let typingSpeed = 250;
+let pauseDuration = 1000;
 
-    function typeText() {
-        const current = professions[currentProfession];
-        const displayText = isDeleting 
-            ? current.slice(0, professionElement.textContent.length - 1)
-            : current.slice(0, professionElement.textContent.length + 1);
+// Tambahkan elemen span untuk teks statis
+professionElement.innerHTML = `<span class="static"></span><span class="dynamic"></span>`;
+const staticText = professionElement.querySelector('.static');
+const dynamicText = professionElement.querySelector('.dynamic');
 
-        professionElement.textContent = displayText;
+// Style untuk memastikan teks tetap pada posisinya
+professionElement.style.display = 'flex';
+professionElement.style.minWidth = '200px'; // Sesuaikan dengan kebutuhan
 
-        if (!isDeleting && displayText === current) {
-            setTimeout(() => { isDeleting = true; }, pauseDuration);
-        } else if (isDeleting && displayText === '') {
-            isDeleting = false;
-            currentProfession = (currentProfession + 1) % professions.length;
+function typeText() {
+    const current = professions[currentProfession];
+    const commonLetters = findCommonStart(
+        current,
+        professions[(currentProfession + 1) % professions.length]
+    );
+    
+    staticText.textContent = commonLetters;
+    
+    // Animasi hanya untuk bagian yang berbeda
+    const remainingText = current.slice(commonLetters.length);
+    dynamicText.textContent = remainingText;
+
+    setTimeout(() => {
+        currentProfession = (currentProfession + 1) % professions.length;
+        typeText();
+    }, pauseDuration);
+}
+
+// Fungsi untuk menemukan karakter yang sama di awal kata
+function findCommonStart(str1, str2) {
+    let common = '';
+    const minLength = Math.min(str1.length, str2.length);
+    
+    for (let i = 0; i < minLength; i++) {
+        if (str1[i] === str2[i]) {
+            common += str1[i];
+        } else {
+            break;
         }
-
-        setTimeout(typeText, isDeleting ? typingSpeed / 2 : typingSpeed);
     }
+    
+    return common;
+}
 
-    typeText();
+// CSS yang diperlukan
+const style = document.createElement('style');
+style.textContent = `
+    .profession {
+        font-family: Arial, sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+    .static {
+        opacity: 1;
+    }
+    .dynamic {
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+    }
+`;
+document.head.appendChild(style);
+
+typeText();
 
     // Dynamic Background Effect
     function createDynamicBackground() {
