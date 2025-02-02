@@ -420,6 +420,25 @@ body {
     border-radius: 2px;
     animation: scroll 2s infinite;
 }
+@media (max-width: 768px) {
+    .hero-scroll {
+        left: 90%; /* Geser lebih ke kanan */
+        bottom: 0.1rem; /* Sesuaikan posisi lebih rendah */
+        transform: translateX(-40%) scale(0.7); /* Perkecil ikon */
+        pointer-events: none; /* Pastikan tidak mengganggu interaksi */
+    }
+
+    .mouse {
+        width: 20px;
+        height: 35px;
+    }
+
+    .mouse::before {
+        width: 2px;
+        height: 6px;
+    }
+}
+
 
 /* Animations */
 @keyframes fadeInLeft {
@@ -773,7 +792,7 @@ body {
     .greeting {
         font-size: 20px;
     }}
-    /* Projects Section Styles */
+/* Projects Section Styles */
 .projects-section {
     padding: 120px 5%;
     background-color: #f8f9fa;
@@ -867,6 +886,70 @@ body {
     color: var(--light-text);
     margin: 0;
     font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(1, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+
+    .project-card:first-child {
+        grid-column: 1;
+        width: 100%;
+    }
+
+    .project-image img {
+        height: 300px;
+    }
+
+    .project-info {
+        padding: 25px;
+    }
+
+    .project-info h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-section {
+        padding: 80px 4%;
+    }
+
+    .project-image img {
+        height: 250px;
+    }
+
+    .project-info {
+        padding: 20px;
+    }
+
+    .project-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-overlay .project-category {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .project-link {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
 }
 
 /* Blog Section Styles */
