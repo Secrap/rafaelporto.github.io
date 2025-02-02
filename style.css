@@ -1487,3 +1487,51 @@ button:hover {
     50% { transform: translateX(5px); }
     75% { transform: translateX(-5px); }
 }
+.footer {
+    background: #111; /* Warna gelap elegan */
+    color: #fff; /* Warna teks putih untuk kontras */
+    padding: 2rem 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom {
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Efek animasi untuk teks */
+.footer-bottom p {
+    letter-spacing: 1px;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom p:hover {
+    color: #f5a623; /* Warna emas saat hover */
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
