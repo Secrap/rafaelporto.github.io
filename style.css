@@ -386,7 +386,7 @@ body {
 }
 
 .floating-card p {
-    color: var(--light-text);
+    color: black;
     font-size: 0.9rem;
 }
 
@@ -727,7 +727,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    color: var(--light-text);
+    color: black;
 }
 
 .contact-item svg {
