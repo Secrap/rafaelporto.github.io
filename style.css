@@ -665,7 +665,7 @@ body {
 }
 
 .bio {
-    color: var(--light-text);
+    color: black;
     line-height: 1.8;
     margin-bottom: 40px;
 }
